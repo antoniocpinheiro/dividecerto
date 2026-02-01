@@ -542,9 +542,274 @@ Basta configurar as rendas e usar normalmente!
 
 Toda contribuição é bem-vinda! 🙏
 
+
+<details>
+<summary><strong>13. Por que a divisão 50/50 é injusta?</strong></summary>
+
+<br>
+
+Quando os rendimentos não são 50/50, a divisão igual cria um **peso enorme e silencioso** em quem ganha menos.
+
+**Exemplo real:**
+- **Maria** ganha R$ 6.000 (60%)
+- **João** ganha R$ 4.000 (40%)
+- **Despesas totais:** R$ 3.000/mês
+
+**Divisão 50/50 (injusta):**
+- Cada um paga: R$ 1.500
+- Maria: 25% da renda (R$ 1.500 / R$ 6.000)
+- João: **37,5% da renda** (R$ 1.500 / R$ 4.000) ← **Muito mais pesado!**
+
+**Divisão Proporcional (justa):**
+- Maria paga: R$ 1.800 (60% de R$ 3.000) = 30% da renda
+- João paga: R$ 1.200 (40% de R$ 3.000) = 30% da renda ← **Mesmo peso!**
+
+**Conclusão:** O dinheiro deixa de ser matemática e passa a ser sobre **justiça**.
+
 </details>
 
+<details>
+<summary><strong>14. Como o DivideCerto remove a carga emocional do dinheiro?</strong></summary>
+
+<br>
+
+O sistema transforma a dívida de algo **pessoal e carregado de emoção** para um **dado objetivo e neutro**.
+
+**Antes (sem sistema):**
+- "Tu me deves R$ 400 do mecânico!" ← **Pessoal, pode gerar conflito**
+- Hesitação em pedir dinheiro de volta
+- Necessidade de lembrar quem pagou o quê
+
+**Depois (com DivideCerto):**
+- "O sistema indica que é preciso acertar R$ 400" ← **Neutro, sem emoção**
+- Cálculo transparente (60% / 40%)
+- Sem margem para discussão
+
+**Impacto:**
+Liberta **espaço mental** para o que realmente importa na relação. O dinheiro torna-se uma **ferramenta gerida em conjunto**, não uma arma ou fonte de ressentimento.
+
+**É sobre construir confiança e transparência numa das áreas mais sensíveis da vida a dois.**
+
+</details>
+
+<details>
+<summary><strong>15. O que acontece se eu esquecer de registrar um pagamento?</strong></summary>
+
+<br>
+
+**Resposta direta:** O sistema fica **completamente desequilibrado** no fim do mês.
+
+**Por quê?**
+Não há solução mágica para o esquecimento. A responsabilidade é **100% dos utilizadores**.
+
+**Exemplo:**
+- Maria pagou R$ 500 do mercado (cartão dela)
+- Esqueceu de registrar
+- Na liquidação, João **não reembolsa** os R$ 200 que deveria (40% de R$ 500)
+- **Maria fica no prejuízo** de R$ 200
+
+**Solução:**
+- ✅ Registre **imediatamente** após pagar
+- ✅ Configure lembretes no celular
+- ✅ Revise semanalmente os gastos
+- ✅ Use categorias para facilitar lembrança
+
+**Regra de ouro:** Quando os dados são inseridos, **garanta que estão corretos**.
+
+</details>
+
+<details>
+<summary><strong>16. Por que o backup é manual? Não dá pra sincronizar na nuvem?</strong></summary>
+
+<br>
+
+**É uma escolha deliberada de arquitetura:**
+
+**Privacidade Absoluta:**
+- Seus dados **nunca passam por servidores de terceiros**
+- Ninguém (nem os criadores) tem acesso à sua informação
+- Zero risco de vazamento externo
+
+**O Preço:**
+- Backup **100% manual**
+- Se perder o celular/formatar sem backup → **perde tudo**
+
+**Como funciona:**
+1. Exporta dados para arquivo **JSON**
+2. Salva onde quiser (Drive, Dropbox, email)
+3. Importa noutro dispositivo para restaurar
+
+**Por que não tem sincronização automática?**
+Porque exigiria:
+- Criar conta (login/senha)
+- Enviar dados para servidor
+- Abrir mão da privacidade total
+
+**Decisão de design:** Privacidade > Conveniência
+
+**Recomendação:** Exporte backup **mensalmente** (crie lembrete recorrente no calendário).
+
+</details>
+
+<details>
+<summary><strong>17. O DivideCerto funciona para 3+ pessoas?</strong></summary>
+
+<br>
+
+**Não.** Atualmente o sistema é otimizado para **apenas 2 pessoas** (casais, amigos dividindo apê, irmãos).
+
+**Por quê?**
+Para manter a **simplicidade dos cálculos** e da interface.
+
+**Cenário com 3 pessoas seria mais complexo:**
+- Pessoa A: 50% da renda
+- Pessoa B: 30% da renda
+- Pessoa C: 20% da renda
+
+**Problemas:**
+- Pagamentos Individuais: quem reembolsa quem?
+- Liquidação: múltiplas transferências cruzadas
+- Interface: muito mais confusa
+
+**Reflexão (levantada no podcast):**
+> Como adaptar a lógica de contribuição proporcional para cenários mais complexos (casas com 3-4 pessoas)?
+
+**Sugestão atual:**
+Se são 3 pessoas, use **2 instâncias** do DivideCerto:
+- Instância 1: Pessoa A + Pessoa B
+- Instância 2: (A+B) conjunto + Pessoa C
+
+(Não é ideal, mas funciona!)
+
+</details>
+
+<details>
+<summary><strong>18. Como o gráfico de pizza ajuda na conversa sobre dinheiro?</strong></summary>
+
+<br>
+
+Ver a proporção visual (ex: 60% / 40%) é um **momento de clareza** para muitos casais.
+
+**Antes do gráfico:**
+- "Eu ganho mais, mas quanto mais?"
+- Diferença de rendimentos é **número abstrato**
+
+**Depois do gráfico:**
+- **Realidade visual** clara
+- Justifica porque a divisão não pode ser igual
+- Estabelece **acordo visual** que ambos veem
+
+**Impacto psicológico:**
+
+A partir daquele momento, a discussão já não é sobre **"quem deve pagar mais"**, passa a ser **"como aplicamos esta proporção justa que ambos concordamos"**.
+
+**Remove a subjetividade toda da equação.**
+
+**Exemplo:**
+```
+Maria (60%)  ████████████  
+João  (40%)  ████████
+```
+
+É **muito mais fácil** aceitar que Maria paga 60% das despesas quando você **vê visualmente** que ela contribui com 60% da renda total.
+
+</details>
+
+<details>
+<summary><strong>19. Qual a diferença entre o DivideCerto e uma folha de cálculo?</strong></summary>
+
+<br>
+
+**Folha de cálculo (Excel/Google Sheets):**
+❌ Vira um **"monstro de fórmulas"** que ninguém tem paciência de atualizar  
+❌ Se estraga facilmente  
+❌ Não gerencia **Pagamentos Individuais** de forma intuitiva  
+❌ Difícil de usar no celular  
+❌ Precisa criar/manter fórmulas  
+
+**DivideCerto:**
+✅ Interface **intuitiva** (não precisa entender fórmulas)  
+✅ **Automatiza** recorrências e parcelamentos  
+✅ **Gráfico visual** da proporção  
+✅ **Liquidação automática** com explicação passo a passo  
+✅ Funciona perfeitamente no **celular** (PWA)  
+✅ **Categorizações** e históricos prontos  
+✅ Marcar como pago (controle visual)  
+
+**O DivideCerto resolve o que folhas de cálculo não conseguem:**
+Gestão de **Pagamentos Individuais** (gastos compartilhados pagos por uma pessoa só) com cálculo automático de reembolso.
+
+**Analogia:** É como comparar fazer contabilidade manual vs usar um software especializado.
+
+</details>
+
+
 ---
+
+## 🎬 **Recursos de Aprendizado**
+
+### **📊 Infográfico Completo**
+
+![DivideCerto - Como Funciona](docs/DivideCerto_Infografico.png)
+
+*Visualização completa do sistema: problema, solução e como funciona em 3 passos simples.*
+
+---
+
+### **🎙️ Podcast Explicativo (8 min)**
+
+**"Dividindo Contas com Justiça: Como o DivideCerto Resolve o Problema do 50/50"**
+
+> Conversa detalhada sobre a filosofia do projeto, explicação passo a passo e impacto na relação.
+
+**🎧 [Ouça no SoundCloud](https://on.soundcloud.com/gGJcff6LtReaiZgZBY)** *(8 minutos)*
+
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/gGJcff6LtReaiZgZBY&color=%23208090&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+
+**Destaques do episódio:**
+- Por que a divisão 50/50 é injusta quando as rendas diferem
+- Como funciona a divisão proporcional na prática
+- Diferença entre "Despesas CC" e "Pagamentos Individuais"
+- O caso do mecânico explicado em detalhes (R$ 1.000)
+- Privacidade total: seus dados nunca saem do dispositivo
+- Reflexão sobre o impacto emocional da gestão financeira justa
+
+📝 **[Ler Transcrição Completa](docs/PODCAST_TRANSCRIPT.md)**
+
+---
+
+### **🎥 Vídeo Tutorial (Narrado)**
+
+**"DivideCerto em Ação: Do Zero à Liquidação"**
+
+> Vídeo narrado mostrando o passo a passo completo do sistema.
+
+**▶️ [Assistir no YouTube](https://youtu.be/k9joMAI-4rU)**
+
+[![DivideCerto - Tutorial Completo](https://img.youtube.com/vi/k9joMAI-4rU/maxresdefault.jpg)](https://youtu.be/k9joMAI-4rU)
+
+*Clique na imagem acima para assistir ao tutorial completo no YouTube*
+
+---
+
+### **📽️ Apresentação de Slides**
+
+**"DivideCerto: Justiça Financeira para Casais"**
+
+> Apresentação visual completa com exemplos práticos, diagramas e a lógica por trás do sistema.
+
+**📊 [Baixar Apresentação (PDF)](docs/DivideCerto_Apresentacao.pdf)** *(~14 MB)*
+
+**Conteúdo:**
+- Problema vs Solução visual
+- Privacidade e arquitetura offline-first
+- Passo a passo detalhado com exemplos
+- Diagrama do "Caso do Mecânico"
+- Regra de ouro: o que registrar (e o que não registrar)
+- Recursos técnicos e open source
+
+---
+
 
 ## 🛠️ **Tecnologia**
 
