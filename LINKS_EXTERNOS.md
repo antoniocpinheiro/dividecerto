@@ -37,6 +37,7 @@ Devido ao limite de **25 MB por arquivo** do GitHub (via interface web), os recu
 
 - **Plataforma:** SoundCloud
 - **URL:** https://on.soundcloud.com/gGJcff6LtReaiZgZBY
+- **URL Completa:** https://soundcloud.com/[seu-user]/dividecerto-podcast
 - **Tamanho original:** ~27 MB
 - **Formato:** M4A
 - **Duração:** ~8 minutos
@@ -63,21 +64,22 @@ src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/gGJcff6LtR
 ## 📁 Recursos Hospedados no GitHub
 
 ### **📊 Infográfico**
-- **Arquivo:** `docs/DivideCerto_Infografico.png`
+- **Arquivo:** [`docs/DivideCerto_Infografico.png`](docs/DivideCerto_Infografico.png)
 - **Tamanho:** ~1.3 MB ✅
 - **Formato:** PNG
 
 ### **📽️ Apresentação**
-- **Arquivo:** `docs/DivideCerto_Apresentacao.pdf`
+- **Arquivo:** [`docs/DivideCerto_Apresentacao.pdf`](docs/DivideCerto_Apresentacao.pdf)
 - **Tamanho:** ~14 MB ✅
 - **Formato:** PDF
 
 ### **📝 Transcrição do Podcast**
-- **Arquivo:** `docs/PODCAST_TRANSCRIPT.md`
+- **Arquivo:** [`docs/PODCAST_TRANSCRIPT.md`](docs/PODCAST_TRANSCRIPT.md)
 - **Tamanho:** ~10 KB ✅
 - **Formato:** Markdown
 
 ---
+
 
 ## ✅ Por que Hospedar Externamente?
 
