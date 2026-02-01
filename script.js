@@ -1010,7 +1010,7 @@ function calculateLiquidation() {
         <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
             <h3 style="color: var(--primary-color); margin-bottom: 10px;">📊 Resumo Geral</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <div class="stat-card"><div class="stat-label">Despesas CEF</div><div class="stat-value">${formatCurrency(totalExp)}</div><div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">${expensesPaid}/${expenses.length} pagas</div></div>
+                <div class="stat-card"><div class="stat-label">Despesas CC</div><div class="stat-value">${formatCurrency(totalExp)}</div><div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">${expensesPaid}/${expenses.length} pagas</div></div>
                 <div class="stat-card"><div class="stat-label">Descontos Total</div><div class="stat-value">${formatCurrency(totalDisc)}</div></div>
                 <div class="stat-card"><div class="stat-label">Saldo CEF</div><div class="stat-value">${formatCurrency(cef)}</div></div>
                 <div class="stat-card"><div class="stat-label">Obrigações</div><div class="stat-value">${formatCurrency(obligations)}</div></div>
@@ -1115,7 +1115,7 @@ function loadExtrato(person) {
         </div>
         
         <div class="extrato-box">
-            <h4 style="color: var(--primary-color); margin-bottom: 10px;">🏠 Despesas CEF (Compartilhadas)</h4>
+            <h4 style="color: var(--primary-color); margin-bottom: 10px;">🏠 Despesas CC (Compartilhadas)</h4>
             <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Status: ${expensesPaid}/${expenses.length} pagas</div>
             ${expenses.length > 0 ? expenses.map(e => `
                 <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border-color);">
@@ -1130,7 +1130,7 @@ function loadExtrato(person) {
             `).join('') : '<p style="color: var(--text-secondary); font-style: italic;">Nenhuma despesa CEF neste mês</p>'}
             ${expenses.length > 0 ? `
                 <div class="extrato-line total">
-                    <span>Total Despesas CEF</span>
+                    <span>Total Despesas CC</span>
                     <span>${formatCurrency(totalExp)}</span>
                 </div>
                 <div class="extrato-line">
@@ -1165,7 +1165,7 @@ function loadExtrato(person) {
         <div class="extrato-box" style="border: 3px solid var(--primary-color);">
             <h4 style="color: var(--primary-color); margin-bottom: 15px;">🧮 Cálculo Final</h4>
             <div class="extrato-line">
-                <span>💰 Total Despesas CEF</span>
+                <span>💰 Total Despesas CC</span>
                 <span>${formatCurrency(totalExp)}</span>
             </div>
             <div class="extrato-line">
@@ -1201,7 +1201,7 @@ function loadExtrato(person) {
             <p style="margin: 0; color: var(--text-primary); line-height: 1.8; font-size: 0.95rem;">
                 <strong>💡 Como foi calculado:</strong><br><br>
                 
-                <strong>1.</strong> Obrigações Totais = Despesas CEF (${formatCurrency(totalExp)}) + Todos Descontos (${formatCurrency(allDisc)}) - Saldo CEF (${formatCurrency(cef)}) = <strong>${formatCurrency(obligations)}</strong><br><br>
+                <strong>1.</strong> Obrigações Totais = Despesas CC (${formatCurrency(totalExp)}) + Todos Descontos (${formatCurrency(allDisc)}) - Saldo CEF (${formatCurrency(cef)}) = <strong>${formatCurrency(obligations)}</strong><br><br>
                 
                 <strong>2.</strong> Sua Obrigação = Obrigações Totais × Sua Proporção de Renda (${formatPercent(ratio)}) = <strong>${formatCurrency(personObl)}</strong><br><br>
                 
@@ -1260,7 +1260,7 @@ function loadCategoryAnalysis() {
                     <div class="stat-value">${formatCurrency(total)}</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Despesas CEF</div>
+                    <div class="stat-label">Despesas CC</div>
                     <div class="stat-value">${formatCurrency(expenses.reduce((s, e) => s + e.amount, 0))}</div>
                 </div>
                 <div class="stat-card">
@@ -1355,7 +1355,7 @@ function loadHistory() {
             <thead>
                 <tr>
                     <th>Mês</th>
-                    <th>Despesas CEF</th>
+                    <th>Despesas CC</th>
                     <th>Descontos</th>
                     <th>Total</th>
                     <th>Obrigações</th>
