@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#208090">
+    <meta name="description" content="Divida despesas de casal de forma proporcional à renda. Simples, justo e transparente.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DivideCerto">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Ícones -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <title>DivideCerto - Dividindo contas com justiça</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Seu conteúdo continua EXATAMENTE igual -->
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="title-section">
+                    <h1>💰 DivideCerto</h1>
+                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Dividindo contas com justiça</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn-theme" onclick="toggleTheme()" title="Alternar tema">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                    <span class="version-badge">V20 PWA</span>
+                </div>
+            </div>
+            <!-- Resto do header continua igual -->
+
+
+            <div class="header-grid">
+                <div class="header-card">
+                    <div class="header-label">📅 Data Inicial</div>
+                    <div class="header-input-group">
+                        <input type="month" id="startDateInput" class="header-input">
+                        <button class="btn-header" onclick="updateStartDate()">✓</button>
+                    </div>
+                </div>
+
+                <div class="header-card">
+                    <div class="header-label">💵 Saldo Conta</div>
+                    <div class="header-input-group">
+                        <input type="number" id="balanceInput" class="header-input" step="0.01" placeholder="0,00">
+                        <button class="btn-header" onclick="updateBalance()">✓</button>
+                    </div>
+                </div>
+
+                <div class="header-card">
+                    <div class="header-label">📊 Renda Total Mês</div>
+                    <div class="header-value" id="totalIncomeDisplay">R$ 0,00</div>
+                </div>
+            </div>
+        </header>
+
+        <div id="successAlert" class="alert alert-success"></div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('renda')">💵 Renda</button>
+            <button class="tab" onclick="switchTab('despesas')">📋 Despesas Conta Compartilhada</button>
+            <button class="tab" onclick="switchTab('descontos')">💳 Descontos</button>
+            <button class="tab" onclick="switchTab('liquidacao')">🧮 Liquidação</button>
+            <button class="tab" onclick="switchTab('extrato1')">📄 <span id="person1TabName">Pessoa 1</span></button>
+            <button class="tab" onclick="switchTab('extrato2')">📄 <span id="person2TabName">Pessoa 2</span></button>
+            <button class="tab" onclick="switchTab('categorias')">🏷️ Categorias</button>
+            <button class="tab" onclick="switchTab('historico')">📊 Histórico</button>
+            <button class="tab" onclick="switchTab('feriados')">📅 Feriados</button>
+            <button class="tab" onclick="switchTab('backup')">💾 Backup</button>
+        </div>
+
+        <!-- Modal Editar Despesa -->
+        <div id="editExpenseModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">✏️ Editar Despesa</h2>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <input type="text" id="editExpenseName">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Valor (R$)</label>
+                    <input type="number" id="editExpenseAmount" step="0.01">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Mês</label>
+                    <input type="month" id="editExpenseMonth">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Categoria</label>
+                    <select id="editExpenseCategory">
+                        <option value="moradia">🏠 Moradia</option>
+                        <option value="alimentacao">🍽️ Alimentação</option>
+                        <option value="transporte">🚗 Transporte</option>
+                        <option value="saude">🏥 Saúde</option>
+                        <option value="lazer">🎮 Lazer</option>
+                        <option value="educacao">📚 Educação</option>
+                        <option value="outros">📦 Outros</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="saveExpenseEdit()">💾 Salvar</button>
+                    <button class="btn btn-danger" onclick="closeEditExpenseModal()">❌ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar Desconto -->
+        <div id="editTransactionModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-header">✏️ Editar Desconto</h2>
+                <div class="form-group">
+                    <label>Pessoa</label>
+                    <select id="editTransactionPerson">
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Descrição</label>
+                    <input type="text" id="editTransactionDescription">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Valor (R$)</label>
+                    <input type="number" id="editTransactionAmount" step="0.01">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Mês</label>
+                    <input type="month" id="editTransactionMonth">
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Categoria</label>
+                    <select id="editTransactionCategory">
+                        <option value="moradia">🏠 Moradia</option>
+                        <option value="alimentacao">🍽️ Alimentação</option>
+                        <option value="transporte">🚗 Transporte</option>
+                        <option value="saude">🏥 Saúde</option>
+                        <option value="lazer">🎮 Lazer</option>
+                        <option value="educacao">📚 Educação</option>
+                        <option value="outros">📦 Outros</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="saveTransactionEdit()">💾 Salvar</button>
+                    <button class="btn btn-danger" onclick="closeEditTransactionModal()">❌ Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Renda -->
+        <div id="renda" class="tab-content active">
+            <div class="card">
+                <h2 class="card-title">Configuração de Renda Mensal</h2>
+                
+                <div class="alert alert-info show">
+                    <strong>ℹ️ Importante:</strong> Configure os valores de salário e auxílios. Use a calculadora abaixo como referência para auxílios variáveis.
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nome Pessoa 1</label>
+                        <input type="text" id="person1Name" placeholder="Ex: João">
+                    </div>
+                    <div class="form-group">
+                        <label>Nome Pessoa 2</label>
+                        <input type="text" id="person2Name" placeholder="Ex: Maria">
+                    </div>
+                    <div class="form-group">
+                        <label>Salário Pessoa 1 (R$)</label>
+                        <input type="number" id="person1Salary" placeholder="0,00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Salário Pessoa 2 (R$)</label>
+                        <input type="number" id="person2Salary" placeholder="0,00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Auxílio Alimentação Pessoa 1 (R$)</label>
+                        <input type="number" id="person1Allowance" placeholder="0,00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Auxílio Alimentação Pessoa 2 (R$)</label>
+                        <input type="number" id="person2Allowance" placeholder="0,00" step="0.01">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="saveIncome()">💾 Salvar Renda</button>
+                </div>
+
+                <div class="pie-chart-container" id="pieChartContainer" style="display: none;">
+                    <div class="pie-chart" id="pieChart"></div>
+                    <div class="pie-legend" id="pieLegend"></div>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 15px; color: var(--primary-color);">🧮 Calculadora de Auxílio Variável</h3>
+                <div class="alert alert-info show">
+                    <strong>💡 Fórmula:</strong> VA Fixo + (Dias úteis × Valor diário × 0,5)
+                    <br><em>Esta calculadora é apenas para referência. Atualize manualmente o campo "Auxílio Alimentação" acima.</em>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>VA Fixo (R$)</label>
+                        <input type="number" id="vaFixed" placeholder="702,85" step="0.01" value="702.85">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor VR Diário (R$)</label>
+                        <input type="number" id="vrDaily" placeholder="37,33" step="0.01" value="37.33">
+                    </div>
+                    <div class="form-group">
+                        <label>Dias Úteis do Mês</label>
+                        <input type="number" id="workDays" placeholder="Auto" min="0" max="31">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="calculateWorkDays()">🔄 Recalcular</button>
+                </div>
+
+                <div class="workdays-info">
+                    <strong>📅 Dias Úteis:</strong> <span id="calculatedWorkDays">-</span> dias | 
+                    <strong>💰 VA Total:</strong> <span id="calculatedVA">R$ 0,00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Despesas -->
+        <div id="despesas" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Despesas Pagas pela Conta Compartilhada</h2>
+                
+                <div class="alert alert-info show">
+                    <strong>ℹ️ Dica:</strong> O mês padrão é preenchido automaticamente com a Data Inicial configurada no topo.
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>📅 Mês da Despesa</label>
+                        <input type="month" id="expenseMonth" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição da Despesa</label>
+                        <input type="text" id="expenseName" placeholder="Ex: Aluguel">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor (R$)</label>
+                        <input type="number" id="expenseAmount" placeholder="0,00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="expenseCategory">
+                            <option value="moradia">🏠 Moradia</option>
+                            <option value="alimentacao">🍽️ Alimentação</option>
+                            <option value="transporte">🚗 Transporte</option>
+                            <option value="saude">🏥 Saúde</option>
+                            <option value="lazer">🎮 Lazer</option>
+                            <option value="educacao">📚 Educação</option>
+                            <option value="outros">📦 Outros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="expenseRecurring" onchange="toggleExpenseOptions()">
+                    <label for="expenseRecurring">🔄 Despesa Recorrente</label>
+                </div>
+
+                <div id="expenseRecurringOptions" class="recurring-options">
+                    <div class="form-group">
+                        <label>Até qual mês? (vazio = 12 meses)</label>
+                        <input type="month" id="expenseEndMonth">
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="expenseInstallment" onchange="toggleExpenseOptions()">
+                    <label for="expenseInstallment">💳 Parcelado</label>
+                </div>
+
+                <div id="expenseInstallmentOptions" class="recurring-options">
+                    <div class="form-group">
+                        <label>Número de Parcelas</label>
+                        <input type="number" id="expenseInstallments" placeholder="Ex: 12" min="2" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label>O valor informado é:</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="expenseTypeTotal" name="expenseType" value="total" checked>
+                                <label for="expenseTypeTotal">💰 Valor Total (dividir)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="expenseTypePerInstallment" name="expenseType" value="perInstallment">
+                                <label for="expenseTypePerInstallment">📝 Valor da Parcela</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="addExpense()">➕ Adicionar Despesa</button>
+                </div>
+
+                <div style="margin: 30px 0; padding: 15px; background: var(--card-bg); border-radius: 10px; border: 2px solid var(--border-color);">
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: var(--text-primary);">🔍 Filtrar por status:</strong>
+                        <select id="expenseFilter" onchange="loadExpensesView()" style="padding: 8px; border-radius: 6px; border: 2px solid var(--border-color); background: var(--input-bg); color: var(--text-primary);">
+                            <option value="all">Todos</option>
+                            <option value="pending">⏳ Pendentes</option>
+                            <option value="paid">✅ Pagos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="expensesView" style="margin-top: 40px;"></div>
+            </div>
+        </div>
+
+        <!-- Tab Descontos -->
+        <div id="descontos" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Descontos / Pagamentos Individuais</h2>
+                
+                <div class="alert alert-info show">
+                    <strong>ℹ️ Dica:</strong> O mês padrão é preenchido automaticamente com a Data Inicial configurada no topo.
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>📅 Mês do Desconto</label>
+                        <input type="month" id="transactionMonth" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pessoa</label>
+                        <select id="transactionPerson">
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input type="text" id="transactionDescription" placeholder="Ex: Cartão">
+                    </div>
+                    <div class="form-group">
+                        <label>Valor (R$)</label>
+                        <input type="number" id="transactionAmount" placeholder="0,00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="transactionCategory">
+                            <option value="moradia">🏠 Moradia</option>
+                            <option value="alimentacao">🍽️ Alimentação</option>
+                            <option value="transporte">🚗 Transporte</option>
+                            <option value="saude">🏥 Saúde</option>
+                            <option value="lazer">🎮 Lazer</option>
+                            <option value="educacao">📚 Educação</option>
+                            <option value="outros">📦 Outros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="transactionRecurring" onchange="toggleTransactionOptions()">
+                    <label for="transactionRecurring">🔄 Desconto Recorrente</label>
+                </div>
+
+                <div id="transactionRecurringOptions" class="recurring-options">
+                    <div class="form-group">
+                        <label>Até qual mês? (vazio = 12 meses)</label>
+                        <input type="month" id="transactionEndMonth">
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="transactionInstallment" onchange="toggleTransactionOptions()">
+                    <label for="transactionInstallment">💳 Parcelado</label>
+                </div>
+
+                <div id="transactionInstallmentOptions" class="recurring-options">
+                    <div class="form-group">
+                        <label>Número de Parcelas</label>
+                        <input type="number" id="transactionInstallments" placeholder="Ex: 12" min="2" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label>O valor informado é:</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="transactionTypeTotal" name="transactionType" value="total" checked>
+                                <label for="transactionTypeTotal">💰 Valor Total (dividir)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="transactionTypePerInstallment" name="transactionType" value="perInstallment">
+                                <label for="transactionTypePerInstallment">📝 Valor da Parcela</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="addTransaction()">➕ Adicionar Desconto</button>
+                </div>
+
+                <div style="margin: 30px 0; padding: 15px; background: var(--card-bg); border-radius: 10px; border: 2px solid var(--border-color);">
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: var(--text-primary);">🔍 Filtrar por status:</strong>
+                        <select id="transactionFilter" onchange="loadTransactionsView()" style="padding: 8px; border-radius: 6px; border: 2px solid var(--border-color); background: var(--input-bg); color: var(--text-primary);">
+                            <option value="all">Todos</option>
+                            <option value="pending">⏳ Pendentes</option>
+                            <option value="paid">✅ Pagos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="transactionsView" style="margin-top: 40px;"></div>
+            </div>
+        </div>
+
+        <!-- Tab Liquidação -->
+        <div id="liquidacao" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Liquidação Mensal</h2>
+                
+                <div class="form-group" style="max-width: 300px; margin-bottom: 30px;">
+                    <label>📅 Selecione o Mês</label>
+                    <input type="month" id="liquidationMonth" onchange="calculateLiquidation()">
+                </div>
+
+                <div id="liquidationDetails"></div>
+            </div>
+        </div>
+
+        <!-- Tab Extrato 1 -->
+        <div id="extrato1" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📄 Extrato - <span id="extrato1PersonName">Pessoa 1</span></h2>
+                
+                <div class="form-group" style="max-width: 300px; margin-bottom: 30px;">
+                    <label>📅 Selecione o Mês</label>
+                    <input type="month" id="extrato1Month" onchange="loadExtrato('person1')">
+                </div>
+
+                <div id="extrato1Content"></div>
+            </div>
+        </div>
+
+        <!-- Tab Extrato 2 -->
+        <div id="extrato2" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📄 Extrato - <span id="extrato2PersonName">Pessoa 2</span></h2>
+                
+                <div class="form-group" style="max-width: 300px; margin-bottom: 30px;">
+                    <label>📅 Selecione o Mês</label>
+                    <input type="month" id="extrato2Month" onchange="loadExtrato('person2')">
+                </div>
+
+                <div id="extrato2Content"></div>
+            </div>
+        </div>
+
+        <!-- Tab Categorias -->
+        <div id="categorias" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">🏷️ Análise por Categorias</h2>
+                
+                <div class="form-group" style="max-width: 300px; margin-bottom: 30px;">
+                    <label>📅 Selecione o Mês</label>
+                    <input type="month" id="categoryMonth" onchange="loadCategoryAnalysis()">
+                </div>
+
+                <div id="categoryContent"></div>
+            </div>
+        </div>
+
+        <!-- Tab Histórico -->
+        <div id="historico" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Histórico Financeiro</h2>
+                <div id="historyTable"></div>
+            </div>
+        </div>
+
+        <!-- Tab Feriados -->
+        <div id="feriados" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Gestão de Feriados</h2>
+                
+                <h3 style="margin-top: 20px; margin-bottom: 15px; color: var(--primary-color);">➕ Adicionar Feriado</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Data do Feriado</label>
+                        <input type="date" id="holidayDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Nome do Feriado</label>
+                        <input type="text" id="holidayName" placeholder="Ex: Natal">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="addHoliday()">➕ Adicionar Feriado</button>
+                </div>
+
+                <h3 style="margin-top: 40px; margin-bottom: 15px; color: var(--primary-color);">📋 Feriados Cadastrados</h3>
+                <div class="holidays-container" id="holidaysList"></div>
+            </div>
+        </div>
+
+        <!-- Tab Backup -->
+        <div id="backup" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">Backup e Restauração</h2>
+                
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="exportData()">📥 Exportar Dados</button>
+                    <button class="btn btn-warning" onclick="document.getElementById('importFile').click()">📤 Importar Dados</button>
+                    <button class="btn btn-danger" onclick="clearAllData()">🗑️ Limpar Tudo</button>
+                </div>
+
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+
+                <div class="alert alert-info show" style="margin-top: 20px;">
+                    <strong>⚠️ Atenção:</strong> Ao importar, todos os dados atuais serão substituídos.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('✅ PWA Registrado!'))
+                    .catch(err => console.log('❌ Erro PWA:', err));
+            });
+        }
+        
+        // Detectar instalação
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Mostrar alerta sugerindo instalação
+            const installAlert = document.createElement('div');
+            installAlert.className = 'alert alert-info show';
+            installAlert.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+            installAlert.innerHTML = `
+                <strong>📱 Instalar DivideCerto</strong><br>
+                Adicione à tela inicial para acesso rápido!
+                <button onclick="installPWA()" style="margin-top: 10px; padding: 8px 16px; background: var(--primary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                    ⬇️ Instalar Agora
+                </button>
+                <button onclick="this.parentElement.remove()" style="margin-top: 10px; margin-left: 10px; padding: 8px 16px; background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer;">
+                    ✕ Agora não
+                </button>
+            `;
+            document.body.appendChild(installAlert);
+        });
+        
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ PWA instalado!');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
