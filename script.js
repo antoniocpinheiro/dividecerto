@@ -1,5 +1,5 @@
-const STORAGE_KEY = 'cef_v20';
-const THEME_KEY = 'cef_theme';
+const STORAGE_KEY = 'dividecerto_v20';
+const THEME_KEY = 'dividecerto_theme';
 
 const DEFAULT_HOLIDAYS = {
     '2026-01-01': 'Confraternização Universal',
@@ -159,14 +159,34 @@ function getMonthsDiff(start, end) {
 }
 
 function saveData() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            showError('❌ Memória cheia! Use "Exportar Dados".');
+        } else {
+            showError('⚠️ Erro ao salvar. Tente exportar backup.');
+        }
+    }
 }
+
 
 function showSuccess(msg) {
     const alert = document.getElementById('successAlert');
     alert.textContent = msg;
     alert.classList.add('show');
     setTimeout(() => alert.classList.remove('show'), 3000);
+}
+
+function showError(msg) {
+    const alert = document.getElementById('successAlert');
+    alert.textContent = msg;
+    alert.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+    alert.classList.add('show');
+    setTimeout(() => {
+        alert.classList.remove('show');
+        alert.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+    }, 3000);
 }
 
 // ============================================
@@ -1127,7 +1147,7 @@ function loadExtrato(person) {
                     </span>
                     <span style="font-weight: 600;">${formatCurrency(e.amount)}</span>
                 </div>
-            `).join('') : '<p style="color: var(--text-secondary); font-style: italic;">Nenhuma despesa CEF neste mês</p>'}
+            `).join('') : '<p style="color: var(--text-secondary); font-style: italic;">Nenhuma despesa CC neste mês</p>'}
             ${expenses.length > 0 ? `
                 <div class="extrato-line total">
                     <span>Total Despesas CC</span>
@@ -1387,6 +1407,22 @@ function addHoliday() {
     document.getElementById('holidayName').value = '';
     showSuccess('✅ Feriado adicionado!');
 }
+
+function validateNumber(value, fieldName, allowNegative = false) {
+    const num = parseFloat(value);
+    if (isNaN(num)) {
+        showError(`❌ ${fieldName}: valor inválido`);
+        return null;
+    }
+    if (!allowNegative && num < 0) {
+        showError(`❌ ${fieldName}: não pode ser negativo`);
+        return null;
+    }
+    return num;
+}
+
+// Usar em saveIncome(), addExpense(), etc
+
 
 function deleteHoliday(date) {
     if (!confirm(`Excluir "${appData.holidays[date]}"?`)) return;
