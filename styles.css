@@ -772,3 +772,76 @@ tbody tr:hover {
     font-weight: 600;
     font-size: 0.9rem;
 }
+
+
+/* ========================================
+   TUTORIAL - BOXES INFORMATIVOS
+   ======================================== */
+
+/* Boxes para modo claro (já funcionam com inline styles) */
+
+/* Dark mode para os boxes do tutorial */
+[data-theme="dark"] div[style*="background: #dbeafe"] {
+    background: #1e3a8a !important;
+}
+
+[data-theme="dark"] div[style*="background: #dbeafe"] h4 {
+    color: #93c5fd !important;
+}
+
+[data-theme="dark"] div[style*="background: #dbeafe"] p {
+    color: #bfdbfe !important;
+}
+
+[data-theme="dark"] div[style*="background: #fef3c7"] {
+    background: #78350f !important;
+}
+
+[data-theme="dark"] div[style*="background: #fef3c7"] h4 {
+    color: #fde68a !important;
+}
+
+[data-theme="dark"] div[style*="background: #fef3c7"] p,
+[data-theme="dark"] div[style*="background: #fef3c7"] ul,
+[data-theme="dark"] div[style*="background: #fef3c7"] li {
+    color: #fef3c7 !important;
+}
+
+[data-theme="dark"] div[style*="background: #e0f2fe"] {
+    background: #0c4a6e !important;
+}
+
+[data-theme="dark"] div[style*="background: #e0f2fe"] h4 {
+    color: #7dd3fc !important;
+}
+
+[data-theme="dark"] div[style*="background: #e0f2fe"] p {
+    color: #bae6fd !important;
+}
+
+[data-theme="dark"] div[style*="background: #fee2e2"] {
+    background: #7f1d1d !important;
+}
+
+[data-theme="dark"] div[style*="background: #fee2e2"] h4 {
+    color: #fca5a5 !important;
+}
+
+[data-theme="dark"] div[style*="background: #fee2e2"] p,
+[data-theme="dark"] div[style*="background: #fee2e2"] ul,
+[data-theme="dark"] div[style*="background: #fee2e2"] li {
+    color: #fecaca !important;
+}
+
+/* Melhorar FAQ no modo escuro */
+[data-theme="dark"] details {
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] details summary {
+    color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] details p {
+    color: var(--text-primary) !important;
+}
