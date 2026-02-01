@@ -69,7 +69,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('renda')">💵 Renda</button>
             <button class="tab" onclick="switchTab('despesas')">📋 Despesas CC</button>
-            <button class="tab" onclick="switchTab('descontos')">💳 Descontos</button>
+            <button class="tab" onclick="switchTab('descontos')">💳 Pagamentos Individuais</button>
             <button class="tab" onclick="switchTab('liquidacao')">🧮 Liquidação</button>
             <button class="tab" onclick="switchTab('extrato1')">📄 <span id="person1TabName">Pessoa 1</span></button>
             <button class="tab" onclick="switchTab('extrato2')">📄 <span id="person2TabName">Pessoa 2</span></button>
@@ -115,10 +115,10 @@
             </div>
         </div>
 
-        <!-- Modal Editar Desconto -->
+        <!-- Modal Editar Pagamento -->
         <div id="editTransactionModal" class="modal">
             <div class="modal-content">
-                <h2 class="modal-header">✏️ Editar Desconto</h2>
+                <h2 class="modal-header">✏️ Editar Pagamento</h2>
                 <div class="form-group">
                     <label>Pessoa</label>
                     <select id="editTransactionPerson">
@@ -581,7 +581,7 @@
         <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #16a34a;">
             <h3 style="color: #16a34a; margin-bottom: 15px;">3️⃣ Cadastre Descontos Pessoais</h3>
             <p style="line-height: 1.8; color: var(--text-primary);">
-                Vá na aba <strong>💳 Descontos</strong> e adicione gastos individuais:
+                Vá na aba <strong>💳 Pagamentos Individuais</strong> e adicione gastos individuais:
             </p>
             <ul style="line-height: 2; color: var(--text-primary);">
                 <li><strong>Cartão de crédito pessoal</strong></li>

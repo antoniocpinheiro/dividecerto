@@ -39,13 +39,19 @@ O sistema já calcula a proporção automaticamente!
 
 ---
 
-### **Passo 3: Cadastre Descontos Individuais**
-1. Vá na aba **💳 Descontos**
-2. Adicione gastos pessoais de cada um:
-   - Cartão de crédito, empréstimos, plano de saúde, etc.
-3. Escolha de quem é (Pessoa 1 ou Pessoa 2)
+### **Passo 3: Cadastre Pagamentos Individuais**
+1. Vá na aba **💳 Pagamentos Individuais**
+2. Adicione despesas compartilhadas que você já pagou com recursos próprios:
+   - Mercado pago no seu cartão pessoal
+   - Conta de luz via Pix da sua conta
+   - Condomínio no débito automático
+3. Escolha quem pagou (Pessoa 1 ou Pessoa 2)
 
-**Dica:** Descontos são valores que saem da conta individual de cada um.
+**Dica:** Pagamentos Individuais são despesas compartilhadas que você adiantou com dinheiro próprio.
+
+**⚠️ NÃO registre aqui:**
+- Gastos exclusivamente seus (academia, roupas, hobbies)
+- Despesas que já saíram da conta compartilhada (CEF/CC)
 
 ---
 
@@ -69,7 +75,7 @@ O sistema já calcula a proporção automaticamente!
 ### **Básicas:**
 - ✅ Divisão proporcional automática
 - ✅ Despesas compartilhadas (Conta Corrente)
-- ✅ Descontos individuais (Cartão/Empréstimo)
+- ✅ Pagamentos Individuais (despesas compartilhadas pagas com recursos próprios)
 - ✅ Cálculo de liquidação (quem deve quanto)
 - ✅ Extratos individualizados com explicação
 
@@ -95,10 +101,20 @@ Gastos que saem da conta conjunta e são divididos proporcionalmente.
 
 ---
 
-### **Descontos**
-Gastos pessoais que saem da conta individual de cada um.
+### **Pagamentos Individuais**
+Despesas compartilhadas que você já pagou com recursos próprios (não passaram pela conta compartilhada).
 
-**Exemplos:** Cartão de crédito pessoal, empréstimo, plano de saúde individual, academia.
+**Exemplos do que registrar:**
+- ✅ Mercado pago no seu cartão pessoal
+- ✅ Conta de luz via Pix da sua conta
+- ✅ Condomínio no débito automático da sua conta
+
+**Exemplos do que NÃO registrar:**
+- ❌ Gastos exclusivamente seus (academia, roupas, hobbies)
+- ❌ Despesas que já saíram da conta compartilhada
+
+**Como funciona:**
+Se você foi ao mercado e pagou R$ 300 no seu cartão pessoal, isso é uma despesa compartilhada que você adiantou. Na liquidação, o sistema calcula quanto você deveria transferir para a conta compartilhada. Como você já pagou R$ 300 diretamente, esse valor será descontado do que você deve transferir.
 
 ---
 
@@ -119,8 +135,8 @@ Cálculo final que mostra quanto cada um deve transferir para a conta conjunta.
 
 **Fórmula:**
 
-Obrigação = (Despesas CC + Total Descontos - Saldo CC) × Proporção
-Transferência = Obrigação - Seus Descontos
+Obrigação = (Despesas CC + Total Pagamentos Individuais - Saldo CC) × Proporção
+Transferência = Obrigação - Seus Pagamentos Individuais
 
 ---
 
@@ -171,6 +187,18 @@ Por enquanto só para 2 pessoas. Futura versão pode ter mais!
 
 ### **7. Tem app na Play Store/App Store?**
 Ainda não, mas é um PWA - você pode instalar direto do navegador!
+
+---
+
+
+### **8. Qual a diferença entre Despesas CC e Pagamentos Individuais?**
+**Despesas CC:** Gastos que saem da conta compartilhada (CEF/CC). Exemplo: aluguel debitado da conta conjunta.
+
+**Pagamentos Individuais:** Despesas compartilhadas que você pagou com dinheiro próprio. Exemplo: você pagou o mercado no seu cartão pessoal.
+
+Ambos são despesas do casal, mas:
+- Despesas CC → já saíram da conta conjunta
+- Pagamentos Individuais → você adiantou e será descontado na liquidação
 
 ---
 

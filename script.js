@@ -240,7 +240,7 @@ function switchTab(name) {
     event.target.classList.add('active');
     
     if (name === 'despesas') loadExpensesView();
-    if (name === 'descontos') loadTransactionsView();
+    if (name === 'pagamentos individuais') loadTransactionsView();
     if (name === 'liquidacao') calculateLiquidation();
     if (name === 'extrato1') loadExtrato('person1');
     if (name === 'extrato2') loadExtrato('person2');
@@ -283,7 +283,7 @@ function updateBalance() {
     saveData();
     updateTotalIncome();
     calculateLiquidation();
-    showSuccess('✅ Saldo CEF atualizado!');
+    showSuccess('✅ Saldo CC atualizado!');
 }
 
 function updateTotalIncome() {
@@ -720,7 +720,7 @@ function addTransaction() {
                 isPaid: false
             });
         }
-        showSuccess(`✅ ${months} descontos recorrentes criados!`);
+        showSuccess(`✅ ${months} pagamentos individuais recorrentes criados!`);
     } else if (isInstallment) {
         const installments = parseInt(document.getElementById('transactionInstallments').value);
         if (!installments || installments < 2) {
@@ -760,7 +760,7 @@ function addTransaction() {
             category,
             isPaid: false
         });
-        showSuccess('✅ Desconto adicionado!');
+        showSuccess('✅ Pagamento Individual adicionado!');
     }
     
     saveData();
@@ -785,7 +785,7 @@ function loadTransactionsView() {
     if (filter === 'pending') transactions = transactions.filter(t => !t.isPaid);
     
     if (transactions.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">💳</div><div class="empty-state-text">Nenhum desconto</div></div>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">💳</div><div class="empty-state-text">Nenhum pagamento individual</div></div>';
         return;
     }
     
@@ -914,12 +914,12 @@ function deleteTransaction(id, group, isInstallment) {
             }
         } else {
             appData.transactions = appData.transactions.filter(t => t.id !== id);
-            showSuccess('✅ Desconto excluído!');
+            showSuccess('✅ Pagamento Individual excluído!');
         }
     } else {
-        if (!confirm('Excluir este desconto?')) return;
+        if (!confirm('Excluir este pagamento individual?')) return;
         appData.transactions = appData.transactions.filter(t => t.id !== id);
-        showSuccess('✅ Desconto excluído!');
+        showSuccess('✅ Pagamento Individual excluído!');
     }
     
     saveData();
@@ -974,7 +974,7 @@ function saveTransactionEdit() {
     loadTransactionsView();
     loadHistory();
     loadCategoryAnalysis();
-    showSuccess('✅ Desconto atualizado!');
+    showSuccess('✅ Pagamento Individual atualizado!');
 }
 
 
@@ -1016,8 +1016,8 @@ function calculateLiquidation() {
     const p1Transfer = p1Obl - p1Disc;
     const p2Transfer = p2Obl - p2Disc;
     
-    const p1Dir = p1Transfer >= 0 ? 'Para CEF' : 'Da CEF';
-    const p2Dir = p2Transfer >= 0 ? 'Para CEF' : 'Da CEF';
+    const p1Dir = p1Transfer >= 0 ? 'Para CC' : 'Da CC';
+    const p2Dir = p2Transfer >= 0 ? 'Para CC' : 'Da CC';
     const p1Color = p1Transfer >= 0 ? '#ea580c' : '#16a34a';
     const p2Color = p2Transfer >= 0 ? '#ea580c' : '#16a34a';
     
@@ -1031,8 +1031,8 @@ function calculateLiquidation() {
             <h3 style="color: var(--primary-color); margin-bottom: 10px;">📊 Resumo Geral</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                 <div class="stat-card"><div class="stat-label">Despesas CC</div><div class="stat-value">${formatCurrency(totalExp)}</div><div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">${expensesPaid}/${expenses.length} pagas</div></div>
-                <div class="stat-card"><div class="stat-label">Descontos Total</div><div class="stat-value">${formatCurrency(totalDisc)}</div></div>
-                <div class="stat-card"><div class="stat-label">Saldo CEF</div><div class="stat-value">${formatCurrency(cef)}</div></div>
+                <div class="stat-card"><div class="stat-label">Pagamentos Individuais Total</div><div class="stat-value">${formatCurrency(totalDisc)}</div></div>
+                <div class="stat-card"><div class="stat-label">Saldo CC</div><div class="stat-value">${formatCurrency(cef)}</div></div>
                 <div class="stat-card"><div class="stat-label">Obrigações</div><div class="stat-value">${formatCurrency(obligations)}</div></div>
                 <div class="stat-card"><div class="stat-label">Renda Total</div><div class="stat-value">${formatCurrency(totalInc)}</div></div>
             </div>
@@ -1043,11 +1043,11 @@ function calculateLiquidation() {
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
                 <div><strong>Renda:</strong> ${formatCurrency(p1Inc)}</div>
                 <div><strong>Proporção:</strong> ${formatPercent(p1Ratio)}</div>
-                <div><strong>Descontos:</strong> ${formatCurrency(p1Disc)}</div>
+                <div><strong>Pagamentos Individuais:</strong> ${formatCurrency(p1Disc)}</div>
                 <div><strong>Obrigação:</strong> ${formatCurrency(p1Obl)}</div>
             </div>
             <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);">
-                Status: ${p1TransPaid}/${p1Trans.length} descontos pagos
+                Status: ${p1TransPaid}/${p1Trans.length} pagamentos individuais pagos
             </div>
             <div style="margin-top: 20px; padding: 15px; background: ${p1Color}22; border-left: 4px solid ${p1Color}; border-radius: 8px;">
                 <div style="font-size: 1.2rem; font-weight: 700; color: ${p1Color};">
@@ -1061,11 +1061,11 @@ function calculateLiquidation() {
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
                 <div><strong>Renda:</strong> ${formatCurrency(p2Inc)}</div>
                 <div><strong>Proporção:</strong> ${formatPercent(p2Ratio)}</div>
-                <div><strong>Descontos:</strong> ${formatCurrency(p2Disc)}</div>
+                <div><strong>Pagamentos Individuais:</strong> ${formatCurrency(p2Disc)}</div>
                 <div><strong>Obrigação:</strong> ${formatCurrency(p2Obl)}</div>
             </div>
             <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);">
-                Status: ${p2TransPaid}/${p2Trans.length} descontos pagos
+                Status: ${p2TransPaid}/${p2Trans.length} pagamentos individuais pagos
             </div>
             <div style="margin-top: 20px; padding: 15px; background: ${p2Color}22; border-left: 4px solid ${p2Color}; border-radius: 8px;">
                 <div style="font-size: 1.2rem; font-weight: 700; color: ${p2Color};">
@@ -1117,7 +1117,7 @@ function loadExtrato(person) {
     const personExpenseShare = totalExp * ratio;
     const transfer = personObl - totalDisc;
     
-    const transferDir = transfer >= 0 ? 'Para CEF' : 'Da CEF';
+    const transferDir = transfer >= 0 ? 'Para CC' : 'Da CC';
     const transferColor = transfer >= 0 ? '#ea580c' : '#16a34a';
     
     const expensesPaid = expenses.filter(e => e.isPaid).length;
@@ -1161,7 +1161,7 @@ function loadExtrato(person) {
         </div>
         
         <div class="extrato-box">
-            <h4 style="color: var(--primary-color); margin-bottom: 10px;">💳 Seus Descontos (Pagamentos Próprios)</h4>
+            <h4 style="color: var(--primary-color); margin-bottom: 10px;">💳 Seus Pagamentos Individuais (Pagamentos Próprios)</h4>
             <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Status: ${transPaid}/${transactions.length} pagos</div>
             ${transactions.length > 0 ? transactions.map(t => `
                 <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border-color);">
@@ -1173,10 +1173,10 @@ function loadExtrato(person) {
                     </span>
                     <span style="font-weight: 600;">${formatCurrency(t.amount)}</span>
                 </div>
-            `).join('') : '<p style="color: var(--text-secondary); font-style: italic;">Nenhum desconto neste mês</p>'}
+            `).join('') : '<p style="color: var(--text-secondary); font-style: italic;">Nenhum pagamento individual neste mês</p>'}
             ${transactions.length > 0 ? `
                 <div class="extrato-line total">
-                    <span>Total Seus Descontos</span>
+                    <span>Total Seus Pagamentos Individuais</span>
                     <span>${formatCurrency(totalDisc)}</span>
                 </div>
             ` : ''}
@@ -1189,7 +1189,7 @@ function loadExtrato(person) {
                 <span>${formatCurrency(totalExp)}</span>
             </div>
             <div class="extrato-line">
-                <span>💳 Total Descontos (Pessoa 1 + Pessoa 2)</span>
+                <span>💳 Total Pagamentos Individuais (Pessoa 1 + Pessoa 2)</span>
                 <span>${formatCurrency(allDisc)}</span>
             </div>
             <div class="extrato-line">
@@ -1205,7 +1205,7 @@ function loadExtrato(person) {
                 <span style="color: var(--danger-color);">${formatCurrency(personObl)}</span>
             </div>
             <div class="extrato-line" style="background: var(--bg-color); font-weight: 600;">
-                <span>✅ Você Já Pagou (seus descontos)</span>
+                <span>✅ Você Já Pagou (seus pagamentos individuais)</span>
                 <span style="color: var(--info-color);">${formatCurrency(totalDisc)}</span>
             </div>
         </div>
@@ -1221,14 +1221,14 @@ function loadExtrato(person) {
             <p style="margin: 0; color: var(--text-primary); line-height: 1.8; font-size: 0.95rem;">
                 <strong>💡 Como foi calculado:</strong><br><br>
                 
-                <strong>1.</strong> Obrigações Totais = Despesas CC (${formatCurrency(totalExp)}) + Todos Descontos (${formatCurrency(allDisc)}) - Saldo CEF (${formatCurrency(cef)}) = <strong>${formatCurrency(obligations)}</strong><br><br>
+                <strong>1.</strong> Obrigações Totais = Despesas CC (${formatCurrency(totalExp)}) + Todos Pagamentos Individuais (${formatCurrency(allDisc)}) - Saldo CC (${formatCurrency(cef)}) = <strong>${formatCurrency(obligations)}</strong><br><br>
                 
                 <strong>2.</strong> Sua Obrigação = Obrigações Totais × Sua Proporção de Renda (${formatPercent(ratio)}) = <strong>${formatCurrency(personObl)}</strong><br><br>
                 
-                <strong>3.</strong> Você já pagou = Seus Descontos = <strong>${formatCurrency(totalDisc)}</strong><br><br>
+                <strong>3.</strong> Você já pagou = Seus Pagamentos Individuais = <strong>${formatCurrency(totalDisc)}</strong><br><br>
                 
                 <strong>4.</strong> ${transfer >= 0 ? 
-                    `Você precisa transferir <strong>${formatCurrency(Math.abs(transfer))}</strong> para a CEF` : 
+                    `Você precisa transferir <strong>${formatCurrency(Math.abs(transfer))}</strong> para a CC` : 
                     `A CEF deve devolver <strong>${formatCurrency(Math.abs(transfer))}</strong> para você`
                 }
             </p>
@@ -1284,7 +1284,7 @@ function loadCategoryAnalysis() {
                     <div class="stat-value">${formatCurrency(expenses.reduce((s, e) => s + e.amount, 0))}</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Descontos</div>
+                    <div class="stat-label">Pagamentos Individuais</div>
                     <div class="stat-value">${formatCurrency(transactions.reduce((s, t) => s + t.amount, 0))}</div>
                 </div>
             </div>
@@ -1376,7 +1376,7 @@ function loadHistory() {
                 <tr>
                     <th>Mês</th>
                     <th>Despesas CC</th>
-                    <th>Descontos</th>
+                    <th>Pagamentos Individuais</th>
                     <th>Total</th>
                     <th>Obrigações</th>
                     <th>Saldo</th>
