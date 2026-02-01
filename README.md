@@ -118,3 +118,94 @@ Se as despesas totais forem R$ 2.000:
 Cálculo final que mostra quanto cada um deve transferir para a conta conjunta.
 
 **Fórmula:**
+
+Obrigação = (Despesas CC + Total Descontos - Saldo CC) × Proporção
+Transferência = Obrigação - Seus Descontos
+
+---
+
+## 📱 **Instalação (PWA)**
+
+### **Android:**
+1. Abra no Chrome
+2. Clique no banner "Adicionar à tela inicial"
+3. Ou: Menu (⋮) → "Instalar app"
+
+### **iPhone:**
+1. Abra no Safari
+2. Botão Compartilhar → "Adicionar à Tela de Início"
+
+---
+
+## 🔒 **Privacidade**
+
+- ✅ **100% offline** - Funciona sem internet após primeiro acesso
+- ✅ **Sem backend** - Não tem servidor guardando seus dados
+- ✅ **Sem cadastro** - Não pedimos email ou senha
+- ✅ **LocalStorage** - Dados ficam só no seu dispositivo
+- ✅ **Sem analytics** - Não rastreamos você
+
+**Backup:** Use a função "Exportar Dados" para fazer backup manual (JSON).
+
+---
+
+## ❓ **FAQ**
+
+### **1. É realmente grátis?**
+Sim! 100% gratuito e sem anúncios.
+
+### **2. Precisa criar conta?**
+Não! Sem cadastro, sem login.
+
+### **3. Meus dados ficam onde?**
+No seu próprio dispositivo (navegador). Não vão para nenhum servidor.
+
+### **4. E se eu trocar de celular?**
+Use a função "Exportar Dados" para fazer backup e "Importar" no novo dispositivo.
+
+### **5. Funciona offline?**
+Sim! Depois do primeiro acesso, funciona sem internet.
+
+### **6. Posso usar com mais de 2 pessoas?**
+Por enquanto só para 2 pessoas. Futura versão pode ter mais!
+
+### **7. Tem app na Play Store/App Store?**
+Ainda não, mas é um PWA - você pode instalar direto do navegador!
+
+---
+
+## 🛠️ **Tecnologia**
+
+- **Frontend:** HTML5, CSS3, JavaScript ES6+
+- **Storage:** LocalStorage (client-side)
+- **Deployment:** GitHub Pages
+- **PWA:** Service Worker + Web App Manifest
+
+**Stack:** 100% vanilla JavaScript - zero dependências externas!
+
+---
+
+## 🤝 **Feedback**
+
+Sua opinião é muito importante! 
+
+📋 **Formulário:** [https://forms.gle/9an2bA2y3jhiAr6U7](https://forms.gle/9an2bA2y3jhiAr6U7)
+
+---
+
+## 📝 **Licença**
+
+© 2026 DivideCerto - Todos os direitos reservados.
+
+---
+
+## 👨‍💻 **Desenvolvido por**
+
+Antonio Pinheiro  
+Porto Alegre, RS, Brasil
+
+---
+
+**Versão:** 20 PWA  
+**Última atualização:** 01/02/2026
+
