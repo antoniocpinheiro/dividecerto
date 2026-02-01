@@ -37,7 +37,6 @@ Devido ao limite de **25 MB por arquivo** do GitHub (via interface web), os recu
 
 - **Plataforma:** SoundCloud
 - **URL:** https://on.soundcloud.com/gGJcff6LtReaiZgZBY
-- **URL Completa:** https://soundcloud.com/[seu-user]/dividecerto-podcast
 - **Tamanho original:** ~27 MB
 - **Formato:** M4A
 - **Duração:** ~8 minutos
