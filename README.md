@@ -746,9 +746,9 @@ Gestão de **Pagamentos Individuais** (gastos compartilhados pagos por uma pesso
 
 ---
 
-## 🎬 **Recursos de Aprendizado**
+## 🎬 Recursos de Aprendizado
 
-### **📊 Infográfico Completo**
+### 📊 Infográfico Completo
 
 ![DivideCerto - Como Funciona](docs/DivideCerto_Infografico.png)
 
@@ -756,15 +756,16 @@ Gestão de **Pagamentos Individuais** (gastos compartilhados pagos por uma pesso
 
 ---
 
-### **🎙️ Podcast Explicativo (8 min)**
+### 🎙️ Podcast Explicativo (8 min)
 
 **"Dividindo Contas com Justiça: Como o DivideCerto Resolve o Problema do 50/50"**
 
 > Conversa detalhada sobre a filosofia do projeto, explicação passo a passo e impacto na relação.
 
-**🎧 [Ouça no SoundCloud](https://on.soundcloud.com/gGJcff6LtReaiZgZBY)** *(8 minutos)*
+**🎧 [Ouça no SoundCloud](https://on.soundcloud.com/gGJcff6LtReaiZgZBY)**
 
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/gGJcff6LtReaiZgZBY&color=%23208090&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/gGJcff6LtReaiZgZBY&color=%23208090&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
 
 **Destaques do episódio:**
 - Por que a divisão 50/50 é injusta quando as rendas diferem
@@ -778,7 +779,7 @@ Gestão de **Pagamentos Individuais** (gastos compartilhados pagos por uma pesso
 
 ---
 
-### **🎥 Vídeo Tutorial (Narrado)**
+### 🎥 Vídeo Tutorial
 
 **"DivideCerto em Ação: Do Zero à Liquidação"**
 
@@ -786,13 +787,13 @@ Gestão de **Pagamentos Individuais** (gastos compartilhados pagos por uma pesso
 
 **▶️ [Assistir no YouTube](https://youtu.be/k9joMAI-4rU)**
 
-[![DivideCerto - Tutorial Completo](https://img.youtube.com/vi/k9joMAI-4rU/maxresdefault.jpg)](https://youtu.be/k9joMAI-4rU)
+[![Tutorial DivideCerto](https://img.youtube.com/vi/k9joMAI-4rU/maxresdefault.jpg)](https://youtu.be/k9joMAI-4rU)
 
 *Clique na imagem acima para assistir ao tutorial completo no YouTube*
 
 ---
 
-### **📽️ Apresentação de Slides**
+### 📽️ Apresentação de Slides
 
 **"DivideCerto: Justiça Financeira para Casais"**
 
