@@ -68,7 +68,7 @@
 
         <div class="tabs">
             <button class="tab active" onclick="switchTab('renda')">💵 Renda</button>
-            <button class="tab" onclick="switchTab('despesas')">📋 Despesas Conta Compartilhada</button>
+            <button class="tab" onclick="switchTab('despesas')">📋 Despesas CC</button>
             <button class="tab" onclick="switchTab('descontos')">💳 Descontos</button>
             <button class="tab" onclick="switchTab('liquidacao')">🧮 Liquidação</button>
             <button class="tab" onclick="switchTab('extrato1')">📄 <span id="person1TabName">Pessoa 1</span></button>
@@ -76,6 +76,7 @@
             <button class="tab" onclick="switchTab('categorias')">🏷️ Categorias</button>
             <button class="tab" onclick="switchTab('historico')">📊 Histórico</button>
             <button class="tab" onclick="switchTab('feriados')">📅 Feriados</button>
+			<button class="tab" onclick="switchTab('tutorial')">📚 Como Usar</button>
             <button class="tab" onclick="switchTab('backup')">💾 Backup</button>
         </div>
 
@@ -235,7 +236,7 @@
         <!-- Tab Despesas -->
         <div id="despesas" class="tab-content">
             <div class="card">
-                <h2 class="card-title">Despesas Pagas pela Conta Compartilhada</h2>
+                <h2 class="card-title">Despesas Pagas pela CC</h2>
                 
                 <div class="alert alert-info show">
                     <strong>ℹ️ Dica:</strong> O mês padrão é preenchido automaticamente com a Data Inicial configurada no topo.
@@ -531,6 +532,180 @@
             </div>
         </div>
     </div>
+
+<div id="tutorial" class="tab-content">
+    <div class="card">
+        <h2 class="card-title">📚 Como Usar o DivideCerto</h2>
+        
+        <div style="background: linear-gradient(135deg, #208090 0%, #2ba8a8 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+            <h3 style="margin: 0 0 10px 0; font-size: 1.5rem;">🎯 Em 5 Passos Simples</h3>
+            <p style="margin: 0; opacity: 0.95;">Configure uma vez, use todo mês!</p>
+        </div>
+        
+        <!-- PASSO 1 -->
+        <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #208090;">
+            <h3 style="color: #208090; margin-bottom: 15px;">1️⃣ Configure sua Renda</h3>
+            <p style="line-height: 1.8; color: var(--text-primary);">
+                Vá na aba <strong>💵 Renda</strong> e preencha:
+            </p>
+            <ul style="line-height: 2; color: var(--text-primary);">
+                <li>Nome de cada pessoa</li>
+                <li>Salário líquido mensal</li>
+                <li>(Opcional) Auxílios (VA/VR)</li>
+            </ul>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                💡 <strong>Dica:</strong> Use o valor líquido (o que cai na conta), não o bruto.
+            </p>
+            <button class="btn-primary" onclick="switchTab('renda')">Ir para Renda →</button>
+        </div>
+        
+        <!-- PASSO 2 -->
+        <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2ba8a8;">
+            <h3 style="color: #2ba8a8; margin-bottom: 15px;">2️⃣ Cadastre Despesas Compartilhadas</h3>
+            <p style="line-height: 1.8; color: var(--text-primary);">
+                Vá na aba <strong>📋 Despesas CC</strong> e adicione gastos da conta conjunta:
+            </p>
+            <ul style="line-height: 2; color: var(--text-primary);">
+                <li><strong>Aluguel</strong> - Use parcelamento se pagar em vezes</li>
+                <li><strong>Condomínio</strong> - Marque recorrente para copiar todo mês</li>
+                <li><strong>Luz, Água, Internet</strong> - Adicione todo mês ou use recorrente</li>
+                <li><strong>Supermercado conjunto</strong></li>
+            </ul>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                💡 <strong>Dica:</strong> Despesas CC = tudo que sai da conta corrente conjunta
+            </p>
+            <button class="btn-primary" onclick="switchTab('despesas')">Ir para Despesas →</button>
+        </div>
+        
+        <!-- PASSO 3 -->
+        <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #16a34a;">
+            <h3 style="color: #16a34a; margin-bottom: 15px;">3️⃣ Cadastre Descontos Pessoais</h3>
+            <p style="line-height: 1.8; color: var(--text-primary);">
+                Vá na aba <strong>💳 Descontos</strong> e adicione gastos individuais:
+            </p>
+            <ul style="line-height: 2; color: var(--text-primary);">
+                <li><strong>Cartão de crédito pessoal</strong></li>
+                <li><strong>Empréstimos/financiamentos</strong></li>
+                <li><strong>Plano de saúde individual</strong></li>
+                <li><strong>Academia, cursos, assinaturas</strong></li>
+            </ul>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                💡 <strong>Dica:</strong> Escolha de quem é o desconto (Pessoa 1 ou Pessoa 2)
+            </p>
+            <button class="btn-primary" onclick="switchTab('descontos')">Ir para Descontos →</button>
+        </div>
+        
+        <!-- PASSO 4 -->
+        <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #ea580c;">
+            <h3 style="color: #ea580c; margin-bottom: 15px;">4️⃣ Veja Quem Deve Quanto</h3>
+            <p style="line-height: 1.8; color: var(--text-primary);">
+                Vá na aba <strong>🧮 Liquidação</strong> e descubra:
+            </p>
+            <ul style="line-height: 2; color: var(--text-primary);">
+                <li>Quanto cada um deve transferir para a conta conjunta</li>
+                <li>Ou quanto a conta deve devolver para você</li>
+                <li>Explicação detalhada de como foi calculado</li>
+            </ul>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                💡 <strong>Mágica:</strong> Tudo calculado automaticamente, de forma proporcional à renda!
+            </p>
+            <button class="btn-primary" onclick="switchTab('liquidacao')">Ir para Liquidação →</button>
+        </div>
+        
+        <!-- PASSO 5 -->
+        <div style="background: var(--bg-color); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #3b82f6;">
+            <h3 style="color: #3b82f6; margin-bottom: 15px;">5️⃣ Marque o que Foi Pago</h3>
+            <p style="line-height: 1.8; color: var(--text-primary);">
+                Conforme for pagando as contas:
+            </p>
+            <ul style="line-height: 2; color: var(--text-primary);">
+                <li>Clique no <strong>✓</strong> ao lado de cada item</li>
+                <li>Itens pagos ficam verdes e menos destacados</li>
+                <li>Veja progresso: "5/8 pagos"</li>
+            </ul>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                💡 <strong>Dica:</strong> Assim você sabe exatamente o que já foi efetivado!
+            </p>
+        </div>
+        
+        <!-- RECURSOS EXTRAS -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 20px; border-radius: 10px; margin-top: 30px;">
+            <h3 style="color: #208090; margin-bottom: 15px;">✨ Recursos Extras</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">📊 Extratos Pessoais</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Veja quanto você deve, com explicação passo a passo dos cálculos</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">🏷️ Categorias</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Analise gastos por tipo: moradia, alimentação, transporte...</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">📈 Histórico</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Compare gastos mês a mês</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">🌙 Modo Escuro</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Clique no botão 🌙 no header</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">🔄 Recorrências</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Cadastre uma vez, replica por N meses</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <h4 style="color: #208090; margin: 0 0 10px 0;">💳 Parcelamentos</h4>
+                    <p style="font-size: 0.9rem; margin: 0; color: var(--text-primary);">Divide automático em parcelas</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ RÁPIDO -->
+        <div style="margin-top: 30px;">
+            <h3 style="color: #208090; margin-bottom: 20px;">❓ Perguntas Frequentes</h3>
+            
+            <details style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color); cursor: pointer;">O que é "Despesas CC"?</summary>
+                <p style="margin-top: 10px; color: var(--text-primary);">São despesas pagas pela <strong>Conta Corrente conjunta</strong> (aluguel, luz, internet, etc). Elas são divididas proporcionalmente entre vocês dois.</p>
+            </details>
+            
+            <details style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color); cursor: pointer;">O que são "Descontos"?</summary>
+                <p style="margin-top: 10px; color: var(--text-primary);">São gastos <strong>pessoais de cada um</strong> (cartão, empréstimo, plano de saúde individual). Cada pessoa paga só os seus.</p>
+            </details>
+            
+            <details style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color); cursor: pointer;">Como funciona a divisão proporcional?</summary>
+                <p style="margin-top: 10px; color: var(--text-primary);">Se você ganha 60% da renda total, paga 60% das despesas compartilhadas. Justo! 😊</p>
+            </details>
+            
+            <details style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color); cursor: pointer;">Meus dados ficam onde?</summary>
+                <p style="margin-top: 10px; color: var(--text-primary);">No <strong>seu próprio navegador</strong> (LocalStorage). Não vão para nenhum servidor. 100% privado!</p>
+            </details>
+            
+            <details style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;">
+                <summary style="font-weight: 600; color: var(--primary-color); cursor: pointer;">Como faço backup?</summary>
+                <p style="margin-top: 10px; color: var(--text-primary);">Na aba <strong>Renda</strong>, clique em <strong>"Exportar Dados"</strong>. Salva um arquivo JSON que você pode importar depois.</p>
+            </details>
+        </div>
+        
+        <!-- CTA FINAL -->
+        <div style="background: linear-gradient(135deg, #208090 0%, #2ba8a8 100%); color: white; padding: 25px; border-radius: 10px; margin-top: 40px; text-align: center;">
+            <h3 style="margin: 0 0 15px 0; font-size: 1.5rem;">🎉 Pronto para começar?</h3>
+            <p style="margin: 0 0 20px 0; opacity: 0.95;">Configure sua renda agora e veja a mágica acontecer!</p>
+            <button class="btn" style="background: white; color: #208090; padding: 15px 30px; font-size: 1.1rem; font-weight: 700;" onclick="switchTab('renda')">
+                Começar Agora →
+            </button>
+        </div>
+    </div>
+</div>
+
 
     <script src="script.js"></script>
     
