@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="DivideCerto">
   <link rel="manifest" href="manifest.json">
   <title>DivideCerto Fácil</title>
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <main class="app-shell">
@@ -250,7 +250,7 @@
       </div>
 
       <div id="dashboardStats" class="stats-grid dashboard-stats"></div>
-      <p class="dashboard-note">Os filtros afetam gastos, gráficos e totais do recorte. <strong>Desembolso efetivo</strong> sempre considera o mês completo e o acerto final, para mostrar quanto realmente saiu do bolso de cada pessoa.</p>
+      <p class="dashboard-note">Os filtros de pagador, categoria e tipo afetam a análise de gastos e os gráficos. <strong>Valor a dividir</strong>, gastos do mês, saldo da conta conjunta e <strong>desembolso efetivo</strong> usam o fechamento completo de cada mês.</p>
 
       <div class="charts-grid">
         <div class="chart-card">
@@ -266,7 +266,7 @@
 
       <div class="dashboard-table-wrap">
         <table class="dashboard-table">
-          <thead><tr><th>Mês</th><th>Total</th><th id="dashboardP1Header">Pessoa 1 · gastos</th><th id="dashboardP2Header">Pessoa 2 · gastos</th><th>Conta conjunta</th><th id="dashboardP1OutlayHeader">Pessoa 1 · desembolso</th><th id="dashboardP2OutlayHeader">Pessoa 2 · desembolso</th><th>Renda P1</th><th>Renda P2</th><th>Divisão</th></tr></thead>
+          <thead><tr><th>Mês</th><th>Gastos</th><th>Saldo CC</th><th>Valor a dividir</th><th id="dashboardP1Header">Pessoa 1 · gastos</th><th id="dashboardP2Header">Pessoa 2 · gastos</th><th>Conta conjunta</th><th id="dashboardP1OutlayHeader">Pessoa 1 · desembolso</th><th id="dashboardP2OutlayHeader">Pessoa 2 · desembolso</th><th>Renda P1</th><th>Renda P2</th><th>Divisão</th></tr></thead>
           <tbody id="dashboardTableBody"></tbody>
         </table>
       </div>
@@ -297,6 +297,6 @@
 
   <section id="printReport" class="print-report" aria-hidden="true"></section>
   <div id="toast" class="toast no-print" role="status" aria-live="polite"></div>
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

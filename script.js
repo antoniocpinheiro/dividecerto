@@ -15,7 +15,7 @@ const TYPE_NAMES = {
 };
 
 const defaultData = () => ({
-  version: 9,
+  version: 10,
   month: currentMonth(),
   people: {
     person1: { name: '', income: 0 },
@@ -247,7 +247,7 @@ function normalizeExpense(expense) {
 function normalizeLoadedData(rawData) {
   const base = defaultData();
   const loaded = { ...base, ...(rawData || {}) };
-  loaded.version = 9;
+  loaded.version = 10;
   loaded.people = { ...base.people, ...(loaded.people || {}) };
   loaded.people.person1 = { ...base.people.person1, ...(loaded.people.person1 || {}) };
   loaded.people.person2 = { ...base.people.person2, ...(loaded.people.person2 || {}) };
@@ -649,43 +649,56 @@ function renderResult() {
 
 function renderDashboard() {
   const { months, rows } = dashboardOccurrences();
-  const total = rows.reduce((s, e) => s + safeNumber(e.amount), 0);
+  const filteredExpenseTotal = rows.reduce((s, e) => s + safeNumber(e.amount), 0);
   const monthly = months.map(month => {
-    const items = rows.filter(e => e.occurrenceMonth === month);
+    const filteredItems = rows.filter(e => e.occurrenceMonth === month);
     const fullCalculation = calculation(month);
     const outlay = effectiveOutlays(fullCalculation);
     return {
       month,
-      total: items.reduce((s, e) => s + safeNumber(e.amount), 0),
-      person1: items.filter(e => e.payer === 'person1').reduce((s, e) => s + safeNumber(e.amount), 0),
-      person2: items.filter(e => e.payer === 'person2').reduce((s, e) => s + safeNumber(e.amount), 0),
-      joint: items.filter(e => e.payer === 'joint').reduce((s, e) => s + safeNumber(e.amount), 0),
+      // Fechamento financeiro do mês: sempre usa o mês completo, inclusive o saldo da conta conjunta.
+      grossTotal: fullCalculation.total,
+      jointBalance: jointBalanceForMonth(month),
+      netTotal: fullCalculation.netObligation,
+      person1: fullCalculation.paid1,
+      person2: fullCalculation.paid2,
+      joint: fullCalculation.paidJoint,
       outlay1: outlay.person1,
       outlay2: outlay.person2,
       income1: incomeForMonth('person1', month),
       income2: incomeForMonth('person2', month),
-      ratio: ratios(month)
+      ratio: ratios(month),
+      // Este valor respeita os filtros e é usado na análise/gráfico de gastos.
+      filteredTotal: filteredItems.reduce((s, e) => s + safeNumber(e.amount), 0)
     };
   });
-  const average = months.length ? total / months.length : 0;
-  const highest = monthly.reduce((best, item) => !best || item.total > best.total ? item : best, null);
+  const netTotal = monthly.reduce((s, m) => s + m.netTotal, 0);
+  const averageNet = months.length ? netTotal / months.length : 0;
+  const highest = monthly.reduce((best, item) => !best || item.netTotal > best.netTotal ? item : best, null);
   const outlay1Total = monthly.reduce((s, m) => s + m.outlay1, 0);
   const outlay2Total = monthly.reduce((s, m) => s + m.outlay2, 0);
   const p1 = personName('person1');
   const p2 = personName('person2');
 
   document.getElementById('dashboardStats').innerHTML = `
-    <div class="stat"><div class="stat-label">Total no recorte</div><div class="stat-value">${money(total)}</div></div>
-    <div class="stat"><div class="stat-label">Média por mês</div><div class="stat-value">${money(average)}</div></div>
-    <div class="stat"><div class="stat-label">Lançamentos</div><div class="stat-value">${rows.length}</div></div>
-    <div class="stat"><div class="stat-label">Maior mês</div><div class="stat-value">${highest && highest.total > 0 ? `${escapeHtml(formatMonth(highest.month, true))} · ${money(highest.total)}` : '—'}</div></div>
+    <div class="stat"><div class="stat-label">Valor a dividir no período</div><div class="stat-value">${money(netTotal)}</div></div>
+    <div class="stat"><div class="stat-label">Média a dividir por mês</div><div class="stat-value">${money(averageNet)}</div></div>
+    <div class="stat"><div class="stat-label">Gastos no filtro</div><div class="stat-value">${money(filteredExpenseTotal)}</div></div>
+    <div class="stat"><div class="stat-label">Lançamentos no filtro</div><div class="stat-value">${rows.length}</div></div>
+    <div class="stat"><div class="stat-label">Maior valor a dividir</div><div class="stat-value">${highest && highest.netTotal > 0 ? `${escapeHtml(formatMonth(highest.month, true))} · ${money(highest.netTotal)}` : '—'}</div></div>
     <div class="stat outlay-stat"><div class="stat-label">Desembolso de ${escapeHtml(p1)}</div><div class="stat-value">${money(outlay1Total)}</div></div>
     <div class="stat outlay-stat"><div class="stat-label">Desembolso de ${escapeHtml(p2)}</div><div class="stat-value">${money(outlay2Total)}</div></div>`;
 
   const tbody = document.getElementById('dashboardTableBody');
   tbody.innerHTML = monthly.length ? monthly.map(m => `<tr>
-    <td>${escapeHtml(formatMonth(m.month, true))}</td><td><strong>${money(m.total)}</strong></td><td>${money(m.person1)}</td><td>${money(m.person2)}</td><td>${money(m.joint)}</td><td class="outlay-cell"><strong>${money(m.outlay1)}</strong></td><td class="outlay-cell"><strong>${money(m.outlay2)}</strong></td><td>${money(m.income1)}</td><td>${money(m.income2)}</td><td>${m.ratio.valid ? `${pct(m.ratio.p1)} / ${pct(m.ratio.p2)}` : '—'}</td>
-  </tr>`).join('') : '<tr><td colspan="10">Selecione um período válido.</td></tr>';
+    <td>${escapeHtml(formatMonth(m.month, true))}</td>
+    <td>${money(m.grossTotal)}</td>
+    <td>${m.jointBalance < 0 ? `− ${money(Math.abs(m.jointBalance))}` : money(m.jointBalance)}</td>
+    <td><strong>${money(m.netTotal)}</strong></td>
+    <td>${money(m.person1)}</td><td>${money(m.person2)}</td><td>${money(m.joint)}</td>
+    <td class="outlay-cell"><strong>${money(m.outlay1)}</strong></td><td class="outlay-cell"><strong>${money(m.outlay2)}</strong></td>
+    <td>${money(m.income1)}</td><td>${money(m.income2)}</td><td>${m.ratio.valid ? `${pct(m.ratio.p1)} / ${pct(m.ratio.p2)}` : '—'}</td>
+  </tr>`).join('') : '<tr><td colspan="12">Selecione um período válido.</td></tr>';
 
   const categoryTotals = Object.keys(CATEGORY_NAMES).map(category => ({
     category,
@@ -693,7 +706,7 @@ function renderDashboard() {
     value: rows.filter(e => e.category === category).reduce((s, e) => s + safeNumber(e.amount), 0)
   })).filter(x => x.value > 0).sort((a, b) => b.value - a.value);
 
-  renderCategoryLegend(categoryTotals, total);
+  renderCategoryLegend(categoryTotals, filteredExpenseTotal);
   requestAnimationFrame(() => {
     drawMonthlyChart(document.getElementById('monthlyChart'), monthly);
     drawCategoryChart(document.getElementById('categoryChart'), categoryTotals);
@@ -739,7 +752,7 @@ function drawMonthlyChart(canvas, items) {
   const pad = { left: 54, right: 12, top: 18, bottom: 42 };
   const chartW = width - pad.left - pad.right;
   const chartH = height - pad.top - pad.bottom;
-  const max = Math.max(...items.map(i => i.total), 0);
+  const max = Math.max(...items.map(i => i.filteredTotal), 0);
 
   ctx.font = '11px system-ui, sans-serif';
   ctx.fillStyle = text;
@@ -761,7 +774,7 @@ function drawMonthlyChart(canvas, items) {
   const labelStep = Math.max(1, Math.ceil(items.length / Math.max(4, Math.floor(width / 90))));
   items.forEach((item, index) => {
     const x = pad.left + index * (barW + gap);
-    const h = max ? (item.total / max) * chartH : 0;
+    const h = max ? (item.filteredTotal / max) * chartH : 0;
     const y = pad.top + chartH - h;
     ctx.fillStyle = primary;
     ctx.beginPath();
